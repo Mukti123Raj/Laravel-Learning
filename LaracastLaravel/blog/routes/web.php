@@ -20,13 +20,13 @@ Route::get('/', function (){
     return view("posts", ["posts" => $posts]);
 });
 
-Route::get("posts/{post}", function($slug){
+Route::get("posts/{post}", function($id){
 
     // find a post by its slug and pass it to a view called post
 
 
 
-    return view("post", ['post' => Post::findOrFail($slug)]);
+    return view("post", ['post' => Post::findOrFail($id)]);
 
     // if(!file_exists($path =  __DIR__ . "/../resources/posts/{$slug}.html" )){
     //     // dd("File not found: {$path}");
