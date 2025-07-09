@@ -2,6 +2,7 @@
 
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
@@ -13,8 +14,11 @@ Route::get('/', function (){
 
     // dd($document->date);
 
+    DB::listen(function($query){
+        logger($query->sql, $query->bindings);
+    });
 
-     $posts = Post::all();
+     $posts = Post::with('category')->get();
 
 
 
