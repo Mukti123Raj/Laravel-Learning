@@ -5,13 +5,15 @@
         @if ($posts->count())
         <x-posts-grid :posts="$posts" />
 
+        {{ $posts->links() }}
+
         @else
         <p class="text-center">No posts yet. Please check back later.</p>
 
         @endif
     </main>
 
-    {{-- @foreach($posts as $post)
+    <!--  @foreach($posts as $post)
     <article>
         <h1>
             <a href="/posts/{{ $post->slug }}">
@@ -34,5 +36,5 @@
             {{ $post->excerpt }}
         </div>
     </article>
-    @endforeach --}}
+    @endforeach  -->
 </x-layout>
