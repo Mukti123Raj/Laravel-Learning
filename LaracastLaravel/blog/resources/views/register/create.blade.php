@@ -16,9 +16,15 @@
                             id="name"
                             class="form-control border border-gray-400 p-2 w-full"
                             placeholder="Name"
+                            value="{{ old('name') }}"
                             aria-describedby="helpId"
                             required
                         />
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-2">
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
                 </div>
 
@@ -29,6 +35,7 @@
                         class="form-control border border-gray-400 p-2 w-full"
                         name="username"
                         id="username"
+                        value="{{ old('username') }}"
                         aria-describedby="helpId"
                         placeholder="Username"
                         required
@@ -40,13 +47,18 @@
                             class="form-control border border-gray-400 p-2 w-full"
                             name="email"
                             id="email"
+                            value="{{ old('email') }}"
                             aria-describedby="helpId"
                             placeholder="Email"
                             required
                         />
-                        <small id="helpId" class="form-text text-muted"
-                            >Help text</small
-                        >
+
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-2">
+                                {{ $message }}
+                            </p>
+                        @enderror
+
                     </div>
 
                     <div class="mb-3">
@@ -62,6 +74,11 @@
                             placeholder="password"
                             required
                         />
+                        @error('password')
+                            <p class="text-red-500 text-xs mt-2">
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
 
                     <button

@@ -30,7 +30,21 @@
             </div>
 
             <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase">Home Page</a>
+                @auth
+                <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</span>
+                <form method="POST" action="/logout" class="inline-block">
+                    @csrf
+                    <button
+                        type="submit"
+                        class="text-xs bg-red-200 rounded-full px-4 py-1 font-bold uppercase"
+                    >
+                        Logout
+                    </button>
+
+                @else
+                <a href="/register" class="text-xs font-bold uppercase">Register</a>
+
+                @endauth
 
                 <a
                     href="#"
@@ -108,4 +122,20 @@
             </div>
         </footer>
     </section>
+
+    <!-- @if (session()->has('success'))
+    <p class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4">{{session('success')->get('success')}}</p>
+
+    @endif -->
+    @if (session()->has('Success'))
+    <div x-data ="{ show: true }"
+    x-init="setTimeout(()=> show = false, 3000)"
+    x-show="show"
+    class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4"
+        <p>
+            {{ session("Success") }}
+        </p>
+    </div>
+
+    @endif
 </body>

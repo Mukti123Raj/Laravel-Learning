@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterCcontroller;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -55,5 +55,8 @@ Route::get("posts/{post:slug}", [PostController::class, 'show'])->name('post');
 // });
 
 
-Route::get('register', [RegisterController::class, 'create']);
-Route::post('register', [RegisterController::class, 'store']);
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::post('logout', [SessionsController::class, 'destroy']);
+
