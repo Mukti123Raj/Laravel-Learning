@@ -1,19 +1,27 @@
-<article class="flex bg-gray-100 p-6 rounded-xl border">
-    <div>
-        <img src="https://i.pravatar.cc/100" alt="" />
-    </div>
-    <div>
-        <header>
-            <h3 class="font-bold">
-                {{ $comment['author'] ?? 'Jane Doe' }}
-            </h3>
-            <p class="text-xs">
-                Posted
-                <time>{{ $comment['date'] ?? '1 day ago' }}</time>
+@props(['comment'])
+
+<x-pannel class="bg-gray-100">
+    <article class="flex ">
+        <div class="mr-4">
+            <img
+                src="https://i.pravatar.cc/100?u={{ $comment->user_id }}"
+                alt=""
+                class="rounded-full w-32"
+            />
+        </div>
+        <div>
+            <header>
+                <h3 class="font-bold">
+                    {{$comment->author->username }}
+                </h3>
+                <p class="text-xs">
+                    Posted
+                    <time>{{ $comment->created_at }}</time>
+                </p>
+            </header>
+            <p class="text-sm mt-2">
+                {{$comment->body }}
             </p>
-        </header>
-        <p class="text-sm mt-2">
-            {{ $comment['body'] ?? 'This is a dummy comment for demonstration purposes.' }}
-        </p>
-    </div>
-</article>
+        </div>
+    </article>
+</x-pannel>

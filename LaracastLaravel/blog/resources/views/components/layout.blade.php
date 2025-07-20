@@ -123,17 +123,13 @@
         </footer>
     </section>
 
-    <!-- @if (session()->has('success'))
-    <p class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4">{{session('success')->get('success')}}</p>
-
-    @endif -->
     @if (session()->has('Success'))
     <div x-data ="{ show: true }"
     x-init="setTimeout(()=> show = false, 3000)"
     x-show="show"
-    class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4"
+    class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4">
         <p>
-            {{ session("Success") }}
+            {{ session('Success') }}
         </p>
     </div>
 
