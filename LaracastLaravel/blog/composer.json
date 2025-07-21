@@ -13,6 +13,7 @@
         "itsgoingd/clockwork": "*",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "mailchimp/marketing": "*",
         "spatie/yaml-front-matter": "^2.1"
     },
     "require-dev": {
