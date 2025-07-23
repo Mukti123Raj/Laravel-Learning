@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MailchimpNewsletter;
 use App\Services\newsletter;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class NewsletterController extends Controller
@@ -19,13 +19,13 @@ class NewsletterController extends Controller
         // $newsletter = new newsletter();
 
         $newsletter->subscribe(request('email'));
-    }catch(\Exception $e){
-        throw ValidationException::withMessages([
+        }catch(\Exception $e){
+            throw ValidationException::withMessages([
             'email' => 'This email address could not be added to our newsletter list.'
         ]);
     }
 
-    return redirect('/#newsletter')->with('success', 'You are now signed up for our newsletter!');
+    return redirect('/')->with('success', 'You are now signed up for our newsletter!');
 
     }
 }
