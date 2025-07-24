@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -23,5 +24,32 @@ class PostController extends Controller
         return view("posts.show", ['post' => $post]);
     }
 
+    public function create(){
+        // if(auth()->guest()){
+        //    abort(Response::HTTP_FORBIDDEN);
+        // }
+        // if(auth()->user()?->usernam !== 'Mukti Raj' ){
+        //    abort(Response::HTTP_FORBIDDEN);
+        // }
+
+        return view('posts.create');
+    }
+
+    public function store(Request $request){
+        request()->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:posts,slug',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+
+        Post::create(array_merge($request->all(), $attributes));
+
+        return redirect('/')->with('success', 'Post created successfully');
+
+    }
 
 }
