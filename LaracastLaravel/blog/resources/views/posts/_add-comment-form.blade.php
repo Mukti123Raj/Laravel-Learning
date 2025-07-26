@@ -1,6 +1,6 @@
 @auth
 <x-pannel>
-    <form action="/posts/{{ $post->slug }}/comments" method="POST">
+    <form id="comment-form" action="/posts/{{ $post->slug }}/comments" method="POST">
         @csrf
         <header class="flex items-center">
             <img
@@ -30,14 +30,20 @@
         </div>
 
         <div class="flex justify-end border-t border-gray-200 pt-6 mt-6">
-            <x-submit-button> Post </x-submit-button>
+            <button
+                type="submit"
+                name="submit_comment"
+                class="bg-blue-500 text-white font-semibold text-xs py-2 px-10 rounded-full hover:bg-blue-600"
+            >
+                Post Comment
+            </button>
         </div>
     </form>
 </x-pannel>
+
 @else
 <p class="font-semibold">
     <a href="/register" class="hover:underline">Register</a> or
     <a href="/login" class="hover:underline">Log in</a> to leave a comment
 </p>
-
 @endauth

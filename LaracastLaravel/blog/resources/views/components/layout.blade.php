@@ -39,7 +39,7 @@
             <div class="mt-8 md:mt-0">
                 @auth
                 <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</span>
-                <form method="POST" action="/logout" class="inline-block">
+                <form id="logout-form" method="POST" action="/logout" class="inline-block">
                     @csrf
                     <button
                         type="submit"
@@ -47,6 +47,7 @@
                     >
                         Logout
                     </button>
+                </form>
 
                 @else
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>

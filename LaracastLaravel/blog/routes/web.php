@@ -34,14 +34,14 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 
         // });
-        Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 
-        Route::get("posts/{post:slug}", [PostController::class, 'show'])->name('post');
+Route::get("posts/{post:slug}", [PostController::class, 'show'])->name('post');
 
-        Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store' ])->middleware('auth');
+Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store' ])->middleware('auth');
 
-        Route::post('newsletter', NewsletterController::class);
+Route::post('newsletter', NewsletterController::class);
 
 
         // Route::get('categories/{category:slug}', function(Category $category){
@@ -77,5 +77,5 @@ Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'
 
 Route::middleware('mustBeAdministrator')->group(function () {
     Route::get('admin/post/create', [PostController::class, 'create']);
-    Route::post('admin/post', [PostController::class, 'store']);
+    Route::post('admin/posts', [PostController::class, 'store']);
 });

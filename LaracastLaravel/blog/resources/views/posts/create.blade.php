@@ -22,7 +22,6 @@
                         class="form-control border border-gray-400 p-2 w-full"
                         name="slug"
                         id="slug"
-
                         rows="2"
                         value="{{ old('slug') }}"
                     ></textarea>
@@ -49,7 +48,6 @@
                         rows="3"
                     ></textarea>
                 </div>
-
                 <div>
                     <label for="category_id" class="form-label"
                         >Category
