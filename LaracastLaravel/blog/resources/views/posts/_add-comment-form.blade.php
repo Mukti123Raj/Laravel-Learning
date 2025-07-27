@@ -30,13 +30,7 @@
         </div>
 
         <div class="flex justify-end border-t border-gray-200 pt-6 mt-6">
-            <button
-                type="submit"
-                name="submit_comment"
-                class="bg-blue-500 text-white font-semibold text-xs py-2 px-10 rounded-full hover:bg-blue-600"
-            >
-                Post Comment
-            </button>
+            <x-form.button>Comment</x-form.button>
         </div>
     </form>
 </x-pannel>

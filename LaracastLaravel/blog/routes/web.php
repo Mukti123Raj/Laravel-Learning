@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
@@ -76,6 +77,10 @@ Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'
 
 
 Route::middleware('mustBeAdministrator')->group(function () {
-    Route::get('admin/post/create', [PostController::class, 'create']);
-    Route::post('admin/posts', [PostController::class, 'store']);
+    Route::get('admin/posts', [AdminPostController::class, 'index']);
+    Route::post('admin/posts', [AdminPostController::class, 'store']);
+    Route::get('admin/post/create', [AdminPostController::class, 'create']);
+    Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
+    Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);
+    Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy']);
 });

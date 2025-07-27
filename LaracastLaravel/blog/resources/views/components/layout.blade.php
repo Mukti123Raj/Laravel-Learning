@@ -19,7 +19,6 @@
     html {
         scroll-behavior: smooth;
     }
-
 </style>
 
 <body style="font-family: Open Sans, sans-serif">
@@ -36,21 +35,50 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
+            <div class="mt-8 md:mt-0 flex items-center">
                 @auth
-                <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</span>
-                <form id="logout-form" method="POST" action="/logout" class="inline-block">
-                    @csrf
-                    <button
-                        type="submit"
-                        class="text-xs bg-red-200 rounded-full px-4 py-1 font-bold uppercase"
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button class="text-xs font-bold uppercase">
+                            Welcome, {{ auth()->user()->name }}
+                        </button>
+                    </x-slot>
+                    <x-dropdown-item
+                        href="/admin/post/create"
+                        :active="request()->is('admin/post/create')"
+                    >
+                        Add New Post
+                    </x-dropdown-item>
+                    <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">
+                        All Posts
+                    </x-dropdown-item>
+                    <x-dropdown-item
+                        href="#"
+                        x-data="{}"
+                        @click.prevent="document.getElementById('logout-form').submit()"
                     >
                         Logout
-                    </button>
-                </form>
+                    </x-dropdown-item>
+                    <form
+                        id="logout-form"
+                        method="POST"
+                        action="/logout"
+
+                    >
+                        @csrf
+                        <button
+                            type="submit"
+                            class="text-xs bg-red-200 rounded-full px-4 py-1 font-bold uppercase"
+                        >
+                            Logout
+                        </button>
+                    </form>
+                </x-dropdown>
 
                 @else
-                <a href="/register" class="text-xs font-bold uppercase">Register</a>
+                <a href="/register" class="text-xs font-bold uppercase"
+                    >Register</a
+                >
                 <a href="/login" class="text-xs font-bold uppercase">Log In</a>
 
                 @endauth
@@ -86,7 +114,7 @@
         </footer>
 
         <footer
-        id="newsletter"
+            id="newsletter"
             class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16"
         >
             <img
@@ -104,7 +132,11 @@
                 <div
                     class="relative inline-block mx-auto lg:bg-gray-200 rounded-full"
                 >
-                    <form method="POST" action="/newsletter" class="lg:flex text-sm">
+                    <form
+                        method="POST"
+                        action="/newsletter"
+                        class="lg:flex text-sm"
+                    >
                         @csrf
                         <div class="lg:py-3 lg:px-5 flex items-center">
                             <label for="email1" class="hidden lg:inline-block">
@@ -122,9 +154,9 @@
                                 class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none"
                             />
                             @error('body')
-                                <span class="text-red-500 text-xs">
-                                     {{ $message }}
-                                </span>
+                            <span class="text-red-500 text-xs">
+                                {{ $message }}
+                            </span>
                             @enderror
                         </div>
 
@@ -141,12 +173,14 @@
     </section>
 
     @if (session()->has('Success'))
-    <div x-data ="{ show: true }"
-    x-init="setTimeout(()=> show = false, 3000)"
-    x-show="show"
-    class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4">
+    <div
+        x-data="{ show: true }"
+        x-init="setTimeout(()=> show = false, 3000)"
+        x-show="show"
+        class="fixed bottom-0 right-0 bg-green-500 text-white font-bold mr-8 mb-8 px-6 py-4"
+    >
         <p>
-            {{ session('Success') }}
+            {{ session("Success") }}
         </p>
     </div>
 

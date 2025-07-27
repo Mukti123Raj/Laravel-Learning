@@ -22,31 +22,5 @@ class PostController extends Controller
         return view('posts.show', ['post' => $post]);
     }
 
-    public function create()
-    {
-        // if(auth()->guest()){
-        //    abort(Response::HTTP_FORBIDDEN);
-        // }
-        // if(auth()->user()?->usernam !== 'Mukti Raj' ){
-        //    abort(Response::HTTP_FORBIDDEN);
-        // }
 
-        return view('posts.create');
-    }
-
-    public function store(Request $request){
-        $attributes = $request->validate([
-            'title' => 'required',
-            'slug' => 'required|unique:posts,slug',
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ]);
-
-        $attributes['user_id'] = auth()->id();
-
-        Post::create($attributes);
-
-        return redirect('/')->with('success', 'Post created successfully');
-    }
 }
