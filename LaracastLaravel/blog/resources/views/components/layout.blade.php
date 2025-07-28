@@ -43,15 +43,22 @@
                             Welcome, {{ auth()->user()->name }}
                         </button>
                     </x-slot>
+
+                    @can('admin')
                     <x-dropdown-item
                         href="/admin/post/create"
                         :active="request()->is('admin/post/create')"
                     >
                         Add New Post
                     </x-dropdown-item>
-                    <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">
+                    <x-dropdown-item
+                        href="/admin/posts"
+                        :active="request()->is('admin/posts')"
+                    >
                         All Posts
                     </x-dropdown-item>
+
+                    @endcan
                     <x-dropdown-item
                         href="#"
                         x-data="{}"
@@ -59,12 +66,7 @@
                     >
                         Logout
                     </x-dropdown-item>
-                    <form
-                        id="logout-form"
-                        method="POST"
-                        action="/logout"
-
-                    >
+                    <form id="logout-form" method="POST" action="/logout">
                         @csrf
                         <button
                             type="submit"
